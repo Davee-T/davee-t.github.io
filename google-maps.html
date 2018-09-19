@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Anything Spatial</title>
+    <link rel="stylesheet" href="css/my-styles.css" media="screen">
+    <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css" media="screen">
+  	<script src="scripts/jquery.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <!-- Access Google Maps API -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOajzd3VteUNHix-zl6pSfJgskLQd4LoQ"></script>
+    <script type="text/javascript">
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(52,-3),
+          zoom: 8
+        };
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        // addButtons(map);
+      };
+      // function addButtons(map){
+      //   document.getElementById('btnTerrain').addEventListener('click', function(){
+      //     map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
+      //   });
+      // }
+      google.maps.event.addDomListener(window, "load", initialize);
+    </script>
+  </head>
+  <body id="mapPage">
+    <!-- Navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+        <a class="navbar-brand text-muted" href="index.html">Anything Spatial</a>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="maps.html">Maps</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- End Navbar -->
+    <!-- <div id="container"> -->
+      <button id="btnTerrain">Terrain</button>
+      <div id="map"></div>
+    <!-- </div> -->
+  </body>
+</html>

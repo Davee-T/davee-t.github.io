@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Edinburgh Parks and Water</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+      #map-canvas {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+      }
+
+    </style>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAAXjuj4r5cWxK311x--eHUh5GbuCZ8dTw&sensor=false"></script>
+    <script>
+	var map;
+	var myLatlng = new google.maps.LatLng(55.92883, -3.21094);
+	var MY_MAPTYPE_ID = 'custom_style';
+	var infowindow;
+
+	function initialize() {
+
+	  var featureOpts = [
+  {
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "landscape.natural",
+    "stylers": [
+      { "visibility": "on" },
+      { "saturation": -100 },
+      { "lightness": -100 }
+    ]
+  },{
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      { "visibility": "on" },
+      { "hue": "#00eeff" },
+      { "lightness": -38 },
+      { "saturation": 56 },
+      { "weight": 1 }
+    ]
+  },{
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      { "visibility": "on" },
+      { "hue": "#22ff00" },
+      { "saturation": 44 },
+      { "lightness": -90 }
+    ]
+  },{
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      { "visibility": "simplified" },
+      { "saturation": -78 },
+      { "lightness": -93 }
+    ]
+  },{
+  }
+]
+
+	  var mapOptions = {
+	    zoom: 13,
+	    center: new google.maps.LatLng(55.94874, -3.20045),
+	    mapTypeControlOptions: {
+	      mapTypeIds: [google.maps.MapTypeId.ROADMAP, MY_MAPTYPE_ID]
+	    },
+	    mapTypeId: MY_MAPTYPE_ID
+	  };
+
+	  map = new google.maps.Map(document.getElementById('map-canvas'),
+	      mapOptions);
+
+	  var styledMapOptions = {
+	    name: 'Custom Style'
+	  };
+
+	  var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
+
+	  map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
+
+	var edinburghParks = [
+	{'name':'Arthurs Seat','lat':55.94416,'lng':-3.162},
+	{'name':'Meadows','lat':55.94138,'lng':-3.19359},
+	{'name':'Inverleith Park','lat':55.96435,'lng':-3.21676},
+	{'name':'Blackford Hill','lat':55.92397,'lng':-3.19239},
+	]  
+
+	for (var x in edinburghParks){
+		var park = edinburghParks[x];
+		var location = new google.maps.LatLng(park.lat,park.lng);
+		addMarker(map,park.name,location);
+	}
+}
+
+function addMarker(map, name, location) {
+  var marker = new google.maps.Marker({
+    position:location,
+    map:map,
+    icon:"http://google-maps-icons.googlecode.com/files/park.png",
+  });
+
+  google.maps.event.addListener(marker,'click',function(){
+    if (typeof infowindow != 'undefined') infowindow.close();
+    infowindow = new google.maps.InfoWindow({
+      content:name
+    });
+      infowindow.open(map,marker);
+  });
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+ 
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>

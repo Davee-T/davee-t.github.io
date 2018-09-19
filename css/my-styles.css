@@ -1,0 +1,34 @@
+/* Layout
+================================= */
+
+html {
+	height: 100%;
+}
+
+body {
+	padding-top: 70px;
+    height: 100%;
+}
+
+.container {
+	max-width: 1000px;
+}
+
+#mapPage {
+		height: 100%;
+		margin: 0;
+		padding-top: 50px;
+
+}
+
+#map {
+		height: 100%;
+		width: 100%;
+		padding: 0;
+		margin:0;
+}
+
+#footer{
+    position: absolute;
+    bottom:0;
+}
